@@ -4,46 +4,94 @@
 <meta charset="UTF-8">
 <title>Ubuntu Server Web Hosting Instructions</title>
 <style>
+/* Reset & basic styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7f9;
+    color: #333;
     padding: 20px;
     line-height: 1.6;
 }
 
 h1 {
     text-align: center;
-    color: #2c3e50;
+    color: #1f3b4d;
+    margin-bottom: 30px;
 }
 
 h2 {
-    color: #34495e;
+    background: #3498db;
+    color: white;
+    padding: 15px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
     cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #ecf0f1;
-    margin-top: 10px;
+    position: relative;
+    transition: background 0.3s;
 }
 
 h2:hover {
-    background-color: #d0d7de;
+    background: #2980b9;
+}
+
+h2::after {
+    content: '+';
+    position: absolute;
+    right: 20px;
+    font-weight: bold;
+}
+
+h2.active::after {
+    content: '−';
 }
 
 .content {
-    padding: 10px 20px;
+    padding: 15px 25px;
+    background: #ffffff;
+    border-left: 4px solid #3498db;
+    border-radius: 0 0 5px 5px;
+    margin-bottom: 15px;
     display: none;
-    background-color: #fff;
-    border-left: 2px solid #3498db;
-    border-right: 2px solid #3498db;
-    border-bottom: 2px solid #3498db;
-    margin-bottom: 10px;
+    animation: fadeIn 0.4s;
 }
 
-code {
-    background-color: #f4f4f4;
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+code, pre {
+    background: #f0f0f0;
     padding: 2px 6px;
     border-radius: 4px;
-    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
 }
 </style>
 </head>
@@ -154,13 +202,38 @@ code {
 </ul>
 </div>
 
+<h2>🔟 Host Website on Vercel (Optional)</h2>
+<div class="content">
+<ul>
+    <li>Go to <a href="https://vercel.com" target="_blank">https://vercel.com</a> and create a free account</li>
+    <li>Install Vercel CLI on your Ubuntu Server:
+<pre>npm install -g vercel</pre>
+</li>
+    <li>Login to Vercel via CLI:
+<pre>vercel login</pre>
+</li>
+    <li>Navigate to your project folder (e.g., <code>/var/www/html</code>)</li>
+    <li>Deploy your website:
+<pre>vercel --prod</pre>
+</li>
+    <li>Follow prompts to set project name, scope, and public URL</li>
+    <li>After deployment, Vercel provides a <code>.vercel.app</code> URL where your site is live</li>
+</ul>
+</div>
+
+<footer>
+<p>Website instructions created for Ubuntu Server web hosting. Hosted locally or optionally on Vercel.</p>
+</footer>
+
 <script>
-// Make collapsible sections clickable
+// Make collapsible sections clickable with toggle
 const headers = document.querySelectorAll('h2');
 headers.forEach(header => {
     header.addEventListener('click', () => {
         const content = header.nextElementSibling;
-        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+        header.classList.toggle('active', !isVisible);
     });
 });
 </script>

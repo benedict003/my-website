@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Ubuntu Server Web Hosting Instructions</title>
 <style>
-/* Reset & basic styling */
 * { box-sizing: border-box; margin:0; padding:0; }
 
 body {
@@ -65,9 +64,9 @@ footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
 
 <h1>Ubuntu Server Web Hosting Instructions</h1>
 
+<!-- Ubuntu Server Steps -->
 <h2>1️⃣ Install Requirements</h2>
 <div class="content">
-<p>Install:</p>
 <ul>
 <li>Oracle VM VirtualBox</li>
 <li>Ubuntu Server (Download latest LTS ISO)</li>
@@ -167,7 +166,10 @@ footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
 </ul>
 </div>
 
-<h2>🔟 Host Website on Vercel via GitHub</h2>
+<!-- Separate Vercel Section -->
+<h1 style="margin-top:50px; color:#1f3b4d;">Vercel Web Hosting Instructions</h1>
+
+<h2>🔹 Deploy via GitHub Repository</h2>
 <div class="content">
 <ul>
 <li>Push your project folder to a GitHub repository.</li>
@@ -181,12 +183,26 @@ footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
 </ul>
 </div>
 
+<h2>🔹 Deploy via Vercel CLI (Optional)</h2>
+<div class="content">
+<ul>
+<li>Install Vercel CLI:
+<pre>npm install -g vercel</pre></li>
+<li>Login via CLI:
+<pre>vercel login</pre></li>
+<li>Navigate to your project folder (e.g., <code>/var/www/html</code>)</li>
+<li>Deploy your website:
+<pre>vercel --prod</pre></li>
+<li>Follow prompts for project name, scope, and public URL.</li>
+<li>Website is live at <code>.vercel.app</code> URL.</li>
+</ul>
+</div>
+
 <footer>
-<p>Website instructions created for Ubuntu Server web hosting. Hosted locally or optionally via Vercel from GitHub.</p>
+<p>Ubuntu Server and Vercel hosting instructions. Use local Apache or cloud hosting via Vercel.</p>
 </footer>
 
 <script>
-// Collapsible sections toggle
 const headers = document.querySelectorAll('h2');
 headers.forEach(header => {
     header.addEventListener('click', () => {

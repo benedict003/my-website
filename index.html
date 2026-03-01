@@ -5,11 +5,7 @@
 <title>Ubuntu Server Web Hosting Instructions</title>
 <style>
 /* Reset & basic styling */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin:0; padding:0; }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,11 +15,7 @@ body {
     line-height: 1.6;
 }
 
-h1 {
-    text-align: center;
-    color: #1f3b4d;
-    margin-bottom: 30px;
-}
+h1 { text-align: center; color: #1f3b4d; margin-bottom: 30px; }
 
 h2 {
     background: #3498db;
@@ -36,20 +28,11 @@ h2 {
     transition: background 0.3s;
 }
 
-h2:hover {
-    background: #2980b9;
-}
+h2:hover { background: #2980b9; }
 
-h2::after {
-    content: '+';
-    position: absolute;
-    right: 20px;
-    font-weight: bold;
-}
+h2::after { content: '+'; position: absolute; right: 20px; font-weight: bold; }
 
-h2.active::after {
-    content: '−';
-}
+h2.active::after { content: '−'; }
 
 .content {
     padding: 15px 25px;
@@ -61,38 +44,21 @@ h2.active::after {
     animation: fadeIn 0.4s;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
-ul {
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-li {
-    margin-bottom: 8px;
-}
-
+ul { margin-left:20px; margin-top:10px; }
+li { margin-bottom:8px; }
 code, pre {
     background: #f0f0f0;
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', Courier, monospace;
 }
+pre { overflow-x:auto; padding:10px; }
+a { color:#2980b9; text-decoration:none; }
+a:hover { text-decoration:underline; }
 
-pre {
-    overflow-x: auto;
-    padding: 10px;
-}
-
-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #666;
-}
+footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
 </style>
 </head>
 <body>
@@ -103,52 +69,51 @@ footer {
 <div class="content">
 <p>Install:</p>
 <ul>
-    <li>Oracle VM VirtualBox</li>
-    <li>Ubuntu Server (Download latest LTS ISO)</li>
+<li>Oracle VM VirtualBox</li>
+<li>Ubuntu Server (Download latest LTS ISO)</li>
 </ul>
 </div>
 
 <h2>2️⃣ Create Ubuntu Server VM</h2>
 <div class="content">
-<p>In VirtualBox:</p>
 <ul>
-    <li>Click <strong>New</strong></li>
-    <li>Type: Linux</li>
-    <li>Version: Ubuntu (64-bit)</li>
-    <li>RAM: 2GB minimum</li>
-    <li>Disk: 20GB (VDI, Dynamically allocated)</li>
-    <li>Attach the Ubuntu Server ISO and start the VM</li>
+<li>Click <strong>New</strong></li>
+<li>Type: Linux</li>
+<li>Version: Ubuntu (64-bit)</li>
+<li>RAM: 2GB minimum</li>
+<li>Disk: 20GB (VDI, Dynamically allocated)</li>
+<li>Attach the ISO and start the VM</li>
 </ul>
 </div>
 
 <h2>3️⃣ Install Ubuntu Server</h2>
 <div class="content">
 <ul>
-    <li>Choose language</li>
-    <li>Keep network on DHCP</li>
-    <li>Create username + password</li>
-    <li>✔ Install OpenSSH Server</li>
-    <li>Use entire disk</li>
-    <li>Finish installation and reboot</li>
-    <li>Login after reboot</li>
+<li>Choose language</li>
+<li>Keep network on DHCP</li>
+<li>Create username + password</li>
+<li>✔ Install OpenSSH Server</li>
+<li>Use entire disk</li>
+<li>Finish installation and reboot</li>
+<li>Login after reboot</li>
 </ul>
 </div>
 
 <h2>4️⃣ Install Apache Web Server</h2>
 <div class="content">
 <ul>
-    <li>Update system: <code>sudo apt update</code> & <code>sudo apt upgrade -y</code></li>
-    <li>Install Apache: <code>sudo apt install apache2 -y</code></li>
-    <li>Check status: <code>sudo systemctl status apache2</code></li>
+<li>Update system: <code>sudo apt update</code> & <code>sudo apt upgrade -y</code></li>
+<li>Install Apache: <code>sudo apt install apache2 -y</code></li>
+<li>Check status: <code>sudo systemctl status apache2</code></li>
 </ul>
 </div>
 
 <h2>5️⃣ Create Your HTML File</h2>
 <div class="content">
 <ul>
-    <li>Default web folder: <code>/var/www/html/</code></li>
-    <li>Edit default page: <code>sudo nano /var/www/html/index.html</code></li>
-    <li>Example content:
+<li>Default web folder: <code>/var/www/html/</code></li>
+<li>Edit default page: <code>sudo nano /var/www/html/index.html</code></li>
+<li>Example content:
 <pre>
 &lt;html&gt;
 &lt;head&gt;
@@ -159,74 +124,69 @@ footer {
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-    </li>
-    <li>Save and exit</li>
+</li>
+<li>Save and exit</li>
 </ul>
 </div>
 
 <h2>6️⃣ Change Network to Bridged Adapter</h2>
 <div class="content">
 <ul>
-    <li>Power off VM</li>
-    <li>Settings → Network → Adapter 1</li>
-    <li>Change from NAT ➜ Bridged Adapter</li>
-    <li>Choose your real network card (WiFi/Ethernet)</li>
-    <li>Start VM again</li>
-    <li>VM now gets an IP from your router</li>
+<li>Power off VM</li>
+<li>Settings → Network → Adapter 1</li>
+<li>Change from NAT ➜ Bridged Adapter</li>
+<li>Choose your network card (WiFi/Ethernet)</li>
+<li>Start VM again</li>
+<li>VM now gets an IP from your router</li>
 </ul>
 </div>
 
 <h2>7️⃣ Get Ubuntu Server IP Address</h2>
 <div class="content">
 <ul>
-    <li>Run: <code>ip a</code></li>
-    <li>Look for something like <code>192.168.1.105</code></li>
-    <li>This is your server IP</li>
+<li>Run: <code>ip a</code></li>
+<li>Look for an IP like <code>192.168.1.105</code></li>
+<li>This is your server IP</li>
 </ul>
 </div>
 
 <h2>8️⃣ Allow Firewall</h2>
 <div class="content">
 <ul>
-    <li>If firewall is active: <code>sudo ufw allow 80</code></li>
-    <li>Enable firewall: <code>sudo ufw enable</code></li>
+<li>If firewall is active: <code>sudo ufw allow 80</code></li>
+<li>Enable firewall: <code>sudo ufw enable</code></li>
 </ul>
 </div>
 
 <h2>9️⃣ Access from Another PC</h2>
 <div class="content">
 <ul>
-    <li>On another computer in same network, open browser</li>
-    <li>Type: <code>http://192.168.1.105</code> (use your server IP)</li>
-    <li>You should see: <strong>Hello from Ubuntu Server!</strong></li>
+<li>Open a browser on another PC in the same network</li>
+<li>Type: <code>http://192.168.1.105</code> (replace with your server IP)</li>
+<li>You should see: <strong>Hello from Ubuntu Server!</strong></li>
 </ul>
 </div>
 
-<h2>🔟 Host Website on Vercel (Optional)</h2>
+<h2>🔟 Host Website on Vercel via GitHub</h2>
 <div class="content">
 <ul>
-    <li>Go to <a href="https://vercel.com" target="_blank">https://vercel.com</a> and create a free account</li>
-    <li>Install Vercel CLI on your Ubuntu Server:
-<pre>npm install -g vercel</pre>
-</li>
-    <li>Login to Vercel via CLI:
-<pre>vercel login</pre>
-</li>
-    <li>Navigate to your project folder (e.g., <code>/var/www/html</code>)</li>
-    <li>Deploy your website:
-<pre>vercel --prod</pre>
-</li>
-    <li>Follow prompts to set project name, scope, and public URL</li>
-    <li>After deployment, Vercel provides a <code>.vercel.app</code> URL where your site is live</li>
+<li>Push your project folder to a GitHub repository.</li>
+<li>Go to <a href="https://vercel.com" target="_blank">Vercel</a> and create a free account.</li>
+<li>Click <strong>New Project → Import Git Repository</strong>.</li>
+<li>Select your GitHub repository containing your website files.</li>
+<li>Follow prompts for project name, scope, and build settings.</li>
+<li>Vercel will automatically deploy your site from GitHub.</li>
+<li>Your website will be live at a <code>.vercel.app</code> URL provided by Vercel.</li>
+<li>To redeploy after updates, just push changes to GitHub; Vercel auto-deploys.</li>
 </ul>
 </div>
 
 <footer>
-<p>Website instructions created for Ubuntu Server web hosting. Hosted locally or optionally on Vercel.</p>
+<p>Website instructions created for Ubuntu Server web hosting. Hosted locally or optionally via Vercel from GitHub.</p>
 </footer>
 
 <script>
-// Make collapsible sections clickable with toggle
+// Collapsible sections toggle
 const headers = document.querySelectorAll('h2');
 headers.forEach(header => {
     header.addEventListener('click', () => {

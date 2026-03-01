@@ -12,7 +12,7 @@ body {
     padding: 20px;
     line-height: 1.6;
 }
-h1 { text-align: center; color: #1f3b4d; margin-bottom: 20px; }
+h1 { text-align: center; color: #1f3b4d; margin-bottom: 30px; }
 h2 {
     background: #3498db;
     color: white;
@@ -48,31 +48,11 @@ pre { overflow-x:auto; padding:10px; }
 a { color:#2980b9; text-decoration:none; }
 a:hover { text-decoration:underline; }
 footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
-.intro {
-    background: #e0f7fa;
-    border-left: 6px solid #00bcd4;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 5px;
-}
 </style>
 </head>
 <body>
 
 <h1>Ubuntu Server Web Hosting Instructions</h1>
-
-<!-- Intro Section -->
-<div class="intro">
-<h2 style="cursor: default; background:#00bcd4; color:white;">Introduction</h2>
-<p>This website provides step-by-step instructions to set up an <strong>Ubuntu Server</strong> for hosting web content locally. Additionally, the same website can be hosted remotely using <strong>Vercel</strong>, a third-party cloud hosting platform, allowing access from anywhere over the internet.</p>
-<p>Use this guide to:</p>
-<ul>
-<li>Install Ubuntu Server in VirtualBox</li>
-<li>Configure Apache and serve HTML pages locally</li>
-<li>Use GitHub to manage your project repository</li>
-<li>Deploy your website to Vercel for remote access</li>
-</ul>
-</div>
 
 <!-- Ubuntu Server Steps -->
 <h2>1️⃣ Install Requirements</h2>
@@ -95,18 +75,165 @@ footer { text-align:center; margin-top:40px; font-size:0.9em; color:#666; }
 </ul>
 </div>
 
-<!-- Remaining sections (3️⃣ to Vercel) remain the same -->
+<h2>3️⃣ Install Ubuntu Server</h2>
+<div class="content">
+<ul>
+<li>Choose language</li>
+<li>Keep network on DHCP</li>
+<li>Create username + password</li>
+<li>✔ Install OpenSSH Server</li>
+<li>Use entire disk</li>
+<li>Finish installation and reboot</li>
+<li>Login after reboot</li>
+</ul>
+</div>
+
+<h2>4️⃣ Install Apache Web Server</h2>
+<div class="content">
+<ul>
+<li>Update system: <code>sudo apt update</code> & <code>sudo apt upgrade -y</code></li>
+<li>Install Apache: <code>sudo apt install apache2 -y</code></li>
+<li>Check status: <code>sudo systemctl status apache2</code></li>
+</ul>
+</div>
+
+<h2>5️⃣ Create Your HTML File</h2>
+<div class="content">
+<ul>
+<li>Default web folder: <code>/var/www/html/</code></li>
+<li>Edit default page: <code>sudo nano /var/www/html/index.html</code></li>
+<li>Example content:
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Server&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello from Ubuntu Server!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</li>
+<li>Save and exit</li>
+</ul>
+</div>
+
+<h2>6️⃣ Change Network to Bridged Adapter</h2>
+<div class="content">
+<ul>
+<li>Power off VM</li>
+<li>Settings → Network → Adapter 1</li>
+<li>Change from NAT ➜ Bridged Adapter</li>
+<li>Choose your network card (WiFi/Ethernet)</li>
+<li>Start VM again</li>
+<li>VM now gets an IP from your router</li>
+</ul>
+</div>
+
+<h2>7️⃣ Get Ubuntu Server IP Address</h2>
+<div class="content">
+<ul>
+<li>Run: <code>ip a</code></li>
+<li>Look for an IP like <code>192.168.1.105</code></li>
+<li>This is your server IP</li>
+</ul>
+</div>
+
+<h2>8️⃣ Allow Firewall</h2>
+<div class="content">
+<ul>
+<li>If firewall is active: <code>sudo ufw allow 80</code></li>
+<li>Enable firewall: <code>sudo ufw enable</code></li>
+</ul>
+</div>
+
+<h2>9️⃣ Access from Another PC</h2>
+<div class="content">
+<ul>
+<li>Open a browser on another PC in the same network</li>
+<li>Type: <code>http://192.168.1.105</code> (replace with your server IP)</li>
+<li>You should see: <strong>Hello from Ubuntu Server!</strong></li>
+</ul>
+</div>
+
+<!-- Separate GitHub Section -->
+<h1 style="margin-top:50px; color:#1f3b4d;">GitHub Commands in Virtual Ubuntu Server CLI</h1>
+
+<h2>🔹 Configure Git User</h2>
+<div class="content">
+<ul>
+<li>Set your name: <code>git config --global user.name "Your Name"</code></li>
+<li>Set your email: <code>git config --global user.email "you@example.com"</code></li>
+<li>Check configuration: <code>git config --list</code></li>
+</ul>
+</div>
+
+<h2>🔹 Initialize Repository & Commit</h2>
+<div class="content">
+<ul>
+<li>Navigate to your project folder (e.g., <code>/var/www/html</code>)</li>
+<li>Initialize git: <code>git init</code></li>
+<li>Add files: <code>git add .</code></li>
+<li>Commit files: <code>git commit -m "Initial commit"</code></li>
+</ul>
+</div>
+
+<h2>🔹 Connect to GitHub & Push</h2>
+<div class="content">
+<ul>
+<li>Create a GitHub repository on your account (e.g., <code>my-website</code>).</li>
+<li>Add remote: <code>git remote add origin https://github.com/username/my-website.git</code></li>
+<li>Push files: <code>git push -u origin main</code></li>
+</ul>
+</div>
+
+<h2>🔹 Pull Updates from GitHub</h2>
+<div class="content">
+<ul>
+<li>To fetch changes from GitHub: <code>git pull origin main</code></li>
+<li>Resolve conflicts if needed, then commit changes.</li>
+</ul>
+</div>
+
+<!-- Separate Vercel Section -->
+<h1 style="margin-top:50px; color:#1f3b4d;">Vercel Web Hosting Instructions</h1>
+
+<h2>🔹 Deploy via GitHub Repository</h2>
+<div class="content">
+<ul>
+<li>Go to <a href="https://vercel.com" target="_blank">Vercel</a> and create a free account.</li>
+<li>Click <strong>New Project → Import Git Repository</strong>.</li>
+<li>Select your GitHub repository containing your website files.</li>
+<li>Follow prompts for project name, scope, and build settings.</li>
+<li>Vercel will automatically deploy your site from GitHub.</li>
+<li>Your website will be live at a <code>.vercel.app</code> URL.</li>
+<li>To redeploy after updates, just push changes to GitHub; Vercel auto-deploys.</li>
+</ul>
+</div>
+
+<h2>🔹 Deploy via Vercel CLI (Optional)</h2>
+<div class="content">
+<ul>
+<li>Install Vercel CLI: <code>npm install -g vercel</code></li>
+<li>Login via CLI: <code>vercel login</code></li>
+<li>Navigate to project folder</li>
+<li>Deploy: <code>vercel --prod</code></li>
+<li>Follow prompts; website is live at <code>.vercel.app</code></li>
+</ul>
+</div>
+
+<footer>
+<p>Ubuntu Server, GitHub CLI, and Vercel hosting instructions.</p>
+</footer>
 
 <script>
 const headers = document.querySelectorAll('h2');
 headers.forEach(header => {
     header.addEventListener('click', () => {
         const content = header.nextElementSibling;
-        if(content){
-            const isVisible = content.style.display === 'block';
-            content.style.display = isVisible ? 'none' : 'block';
-            header.classList.toggle('active', !isVisible);
-        }
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+        header.classList.toggle('active', !isVisible);
     });
 });
 </script>
